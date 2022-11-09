@@ -1,16 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Employee;
+
+
 
 import java.util.Scanner;
 
-/**
- *
- * @author BARIŞ HANIM İNCE
- */
+
+
 
 
  public class Employee {
@@ -33,45 +28,47 @@ private int hireYear;
    
 
 
-    public String getName() {
+    public String getAd() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setAd(String name) {
         this.name = name;
     }
 
-    public int getSalary() {
+    public int getMaas() {
         return salary;
     }
 
-    public void setSalary(int salary) {
+    public void setMaas(int salary) {
         this.salary = salary;
     }
 
-    public int getworkHours() {
+    public int getCalismaSaati() {
         return workHours;
     }
 
-    public void setworkHours(int workHours) {
+    public void setCalismaSaati(int workHours) {
         this.workHours = workHours;
     }
 
-    public int gethireYear() {
+    public int getİseGiris() {
         return hireYear;
     }
 
-    public void sethireYear(int hireYear) {
+    public void setİseGiris(int hireYear) {
         this.hireYear = hireYear;
     }
 
+   int vergi=0;
+   int bonus = 0;
+   int maasSon = 0;
    
-    
     public int tax(){
-        int vergi=0;
+        
         if(salary>=1000){
  
-            vergi=(int) (salary * 0.03) ;
+            vergi=(int) (salary * 3/100) ;
             return vergi;
         }
         else {
@@ -81,96 +78,87 @@ private int hireYear;
 
     }
     
-        
+   
+    
+       public int  raiseSalary(){
+       
+      
+        if(2021-hireYear<10){
+            maasSon=(int) (salary*5/100);   
+        }
+        else if((2021-hireYear)>9 && (2021-hireYear)<20){
+            maasSon=(int) (salary*10/100);  
+        }
+        else if((2021-hireYear)>19){
+           maasSon=(int) (salary*15/100);
+        }
+        else{
+            return maasSon;
+        }
+    return maasSon;
+    }
+  
+
+         
     public int bonus(){
-        int bonus = 0;
+   
         if(workHours>40){
             bonus=(workHours-40)*(30);   
+            return bonus;
         }
         else {
             return bonus;
         }
-    return bonus;
-    }
-    
-     public int  raiseSalary(){
-        int x = 0;
-        int newSalary= (salary+bonus())-tax();
-        if(2021-hireYear<10){
-            x=(int) (newSalary*0.05);   
-        }
-        if((2021-hireYear)>9 && (2021-hireYear)<20){
-            x=(int) (newSalary*0.1);  
-        }
-        if((2021-hireYear)>19){
-            x=(int) (newSalary*0.15);
-        }
-    return x;
-    }
-  
-       public void toString(){
-        System.out.println("Bilgileriniz:");
-        System.out.println("Ad: " +name);
-        System.out.println("Maaş: " +salary);
-        System.out.println("Çalışma saati: "+workHours);
-        System.out.println("Başlangıç Yılı: "+hireYear);
-        System.out.println("Vergi: " +tax());
-        System.out.println("Bonus: " +bonus());
-        System.out.println("Maaş artışı: " +raiseSalary());
-        int VergiMaas = (salary+bonus())- tax();
-        System.out.println("Vergi ve bonuslarla birlikte maaş: " + VergiMaas);
-        int ToplamMaas = (salary+bonus()+raiseSalary())- tax();
-        System.out.println("Toplam maaş: " + ToplamMaas);
-     
-      }
-    
-       
- 
-    
 
-    /**
-     *
-     * @param args
-     */
-    public static void  main(String[] args) {
+    }
        
-        String ad;
-        int maas,calismaSaati,calismaYili;
-       
-        
-        Scanner scan=new Scanner(System.in);
-             
-        System.out.println("Ad giriniz:");
-        ad=scan.nextLine();
-        System.out.println("Maas giriniz:");
-        maas=scan.nextInt();
-        System.out.println("Çalışma saati giriniz:");
-        calismaSaati=scan.nextInt();
-        System.out.println("Çalışma yılı giriniz:");
-        calismaYili=scan.nextInt();
-        
-        
-        Employee employee=new Employee();
-        employee.Employee(ad, maas, calismaSaati, calismaYili);
  
+
+    public static void  main(String[] args) {
+          
+        String ad;
+        int maas;
+        int calismaSaati;
+        int calismaYili;
+       
         
-     
-      employee.setName(ad);
-      employee.setSalary(maas);
-      employee.setworkHours(calismaSaati);
-      employee.sethireYear(calismaYili);
+        Scanner toString=new Scanner(System.in);
+             
+        System.out.println("Adınız = ");
+        ad=toString.next();
+        System.out.println("Maaşınız = ");
+        maas=toString.nextInt();
+        System.out.println("Çalışma saatiniz = ");
+        calismaSaati=toString.nextInt();
+        System.out.println("İşe giriş yılınız = ");
+        calismaYili=toString.nextInt();
+   
+      Employee calisan=new Employee();
+      calisan.Employee(ad, maas, calismaSaati, calismaYili);
+      calisan.setAd(ad);
+      calisan.setMaas(maas);
+      calisan.setCalismaSaati(calismaSaati);
+      calisan.setİseGiris(calismaYili);
+      int Maas1 = (maas+calisan.bonus())- calisan.tax();
+      int Maas2 = (maas+calisan.bonus()+calisan.raiseSalary())- calisan.tax();
       
-       employee.toString();
+        System.out.println("----Sonuclar-----");
+        System.out.println("İsim= " +ad);
+        System.out.println("Maaş= " +maas);
+        System.out.println("Çalışma saati= "+calismaSaati);
+        System.out.println("İşe Başlangıç Yılı= "+calismaYili);
+        System.out.println("Vergi miktarı= " +calisan.tax());
+        System.out.println("Bonus= " +calisan.bonus());
+        System.out.println("Maaş artışı= " +calisan.raiseSalary());
+        System.out.println("Toplam maaş= " + Maas2);
+        System.out.println("Vergi ve bonuslarla birlikte maaş= " + Maas1);
+        
 
 
              }
     
  }
     
-
-
-
-
     
     
     
